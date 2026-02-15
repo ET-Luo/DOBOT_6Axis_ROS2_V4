@@ -1,0 +1,33 @@
+# MoveIt uses this configuration for controller management
+
+moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControllerManager
+
+moveit_simple_controller_manager:
+  controller_names:
+    - cr5_group_controller
+
+  cr5_group_controller:
+    type: FollowJointTrajectory
+    action_ns: follow_joint_trajectory
+    default: true
+    joints:
+      - joint1
+      - joint2
+      - joint3
+      - joint4
+      - joint5
+      - joint6
+
+# Trajectory execution parameters
+trajectory_execution:
+  allowed_execution_duration_scaling: 20.0
+  allowed_goal_duration_margin: 30.0
+  allowed_start_tolerance: 0.5
+  execution_duration_monitoring: true
+  execution_timeout: 120.0
+  wait_for_trajectory_completion: true
+  goal_tolerance: 0.002
+  stopped_velocity_tolerance: 0.05
+
+planning_time_limit: 5.0
+planning_attempts: 10
