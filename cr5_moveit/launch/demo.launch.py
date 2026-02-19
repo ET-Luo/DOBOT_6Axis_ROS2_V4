@@ -74,6 +74,7 @@ def generate_launch_description():
         resolved_width = resolve_dim(camera_width, default_width)
         resolved_height = resolve_dim(camera_height, default_height)
 
+        print(f"[CR5 Camera Params] profile={camera_profile} length={resolved_length} width={resolved_width} height={resolved_height} offset=({camera_offset_x},{camera_offset_y},{camera_offset_z}) use_ee_camera={use_ee_camera}")
         moveit_config = (
             MoveItConfigsBuilder("cr5_robot", package_name="cr5_moveit")
             .robot_description(

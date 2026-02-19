@@ -6,7 +6,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 import os
 from ament_index_python.packages import get_package_share_directory
 def generate_launch_description():
-    name = os.getenv("DOBOT_TYPE")
+    name = (os.getenv("DOBOT_TYPE") or "cr5").strip().lower()
     package_name = f'{name}_moveit'
     urdf_name = "demo.launch.py"
 

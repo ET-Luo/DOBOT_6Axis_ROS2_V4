@@ -1,10 +1,14 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="cr5_robot">
+    <material name="ivory_white">
+    <!-- 象牙白近似颜色 -->
+    <color rgba="0.98 0.97 0.94 1.0"/>
+    </material>
     <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
     <xacro:arg name="use_ee_camera" default="true" />
-    <xacro:arg name="camera_length" default="0.06" />
-    <xacro:arg name="camera_width" default="0.04" />
-    <xacro:arg name="camera_height" default="0.04" />
+    <xacro:arg name="camera_length" default="0.1" />
+    <xacro:arg name="camera_width" default="0.08" />
+    <xacro:arg name="camera_height" default="0.08" />
     <xacro:arg name="camera_offset_x" default="0.03" />
     <xacro:arg name="camera_offset_y" default="0.0" />
     <xacro:arg name="camera_offset_z" default="0.06" />
@@ -32,6 +36,7 @@
                 <geometry>
                     <box size="${camera_length} ${camera_width} ${camera_height}"/>
                 </geometry>
+                 <material name="ivory_white"/>
             </visual>
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
