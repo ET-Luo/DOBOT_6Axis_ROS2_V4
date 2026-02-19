@@ -1,9 +1,46 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="cr5_robot">
     <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
+    <xacro:arg name="use_ee_camera" default="true" />
+    <xacro:arg name="camera_length" default="0.06" />
+    <xacro:arg name="camera_width" default="0.04" />
+    <xacro:arg name="camera_height" default="0.04" />
+    <xacro:arg name="camera_offset_x" default="0.03" />
+    <xacro:arg name="camera_offset_y" default="0.0" />
+    <xacro:arg name="camera_offset_z" default="0.06" />
 
     <!-- Import cr5_robot urdf file -->
     <xacro:include filename="$(find dobot_rviz)/urdf/cr5_robot.urdf" />
+
+    <xacro:if value="$(arg use_ee_camera)">
+        <xacro:property name="camera_length" value="$(arg camera_length)"/>
+        <xacro:property name="camera_width" value="$(arg camera_width)"/>
+        <xacro:property name="camera_height" value="$(arg camera_height)"/>
+        <xacro:property name="camera_offset_x" value="$(arg camera_offset_x)"/>
+        <xacro:property name="camera_offset_y" value="$(arg camera_offset_y)"/>
+        <xacro:property name="camera_offset_z" value="$(arg camera_offset_z)"/>
+
+        <joint name="camera_joint" type="fixed">
+            <parent link="Link6"/>
+            <child link="camera_link"/>
+            <origin xyz="${camera_offset_x} ${camera_offset_y} ${camera_offset_z}" rpy="0 0 0"/>
+        </joint>
+
+        <link name="camera_link">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <box size="${camera_length} ${camera_width} ${camera_height}"/>
+                </geometry>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <box size="${camera_length} ${camera_width} ${camera_height}"/>
+                </geometry>
+            </collision>
+        </link>
+    </xacro:if>
 
     <!-- Import control_xacro -->
     <xacro:include filename="cr5_robot.ros2_control.xacro" />
